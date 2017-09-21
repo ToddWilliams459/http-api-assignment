@@ -22,6 +22,22 @@ const handleResponse = (xhr) => {
         content.innerHTML = `<b>Bad Request</b>`;
         break;
             
+        case 401:
+        content.innerHTML = `<b>Unauthorized</b>`
+        break;
+
+        case 403:
+        content.innerHTML = `<b>Forbidden</b>`
+        break;
+        
+        case 500:
+        content.innerHTML = `<b>Internal</b>`
+        break;
+            
+        case 501:
+        content.innerHTML = `<b>NotImplemented</b>`
+        break;
+            
         case 404:
         content.innerHTML = `<b>Resource Not Found</b>`;
         break;

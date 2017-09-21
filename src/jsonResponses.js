@@ -21,6 +21,7 @@ const success = (request, response) => {
 // function to show a bad request without the correct parameters
 const badRequest = (request, response, params) => {
   // message to send
+    console.log(a.b.c.d);
   const responseJSON = {
     message: 'This request has the required parameters',
   };
@@ -62,6 +63,40 @@ const forbidden = (request, response) => {
   respondJSON(request, response, 403, responseJSON);
 };
 
+const unauthorized = (request, response) => {
+  // error message with a description and consistent error id
+  const responseJSON = {
+    message: 'Missing loggedIn query parameter set to yes.',
+    id: 'Unauthorized',
+  };
+
+  // return our json with a 404 not found error code
+  respondJSON(request, response, 401, responseJSON);
+};
+
+const internal = (request, response) => {
+  // error message with a description and consistent error id
+  const responseJSON = {
+    message: 'Internal Server Error.',
+    id: 'internal',
+  };
+
+  // return our json with a 404 not found error code
+  respondJSON(request, response, 500, responseJSON);
+};
+
+const notImplemented = (request, response) => {
+  // error message with a description and consistent error id
+  const responseJSON = {
+    message: 'A get request for this page has not been implemented yet. Check again later for updated content.',
+    id: 'notImplemented',
+  };
+
+  // return our json with a 404 not found error code
+  respondJSON(request, response, 501, responseJSON);
+    console.log("Hi mom");
+};
+
 // exports to set functions to public.
 // In this syntax, you can do getIndex:getIndex, but if they
 // are the same name, you can short handle to just getIndex,
@@ -69,4 +104,8 @@ module.exports = {
   success,
   badRequest,
   notFound,
+  forbidden,
+  unauthorized,
+    internal,
+    notImplemented,
 };
