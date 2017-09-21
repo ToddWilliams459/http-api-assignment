@@ -7,6 +7,68 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
 
+const handleResponse = (xhr) => {
+    const content = document.querySelector("#content");
+    
+    const obj = JSON.parse(xhr.response);
+    
+    switch(xhr.status) {
+        case 200:
+        content.innerHTML = `<b>Success</b>`;   
+        console.log("SUCCESS");
+        break;
+            
+        case 400:
+        content.innerHTML = `<b>Bad Request</b>`;
+        break;
+            
+        case 404:
+        content.innerHTML = `<b>Resource Not Found</b>`;
+        break;
+            
+        default:
+        content.innerHTML = `Error code not implemented by client.`;           
+        break;
+       }
+};
+
+const sendAjax = (url, type) => {
+  const xhr = new XMLHttpRequest();
+    
+  xhr.open('GET', url);
+    
+  xhr.setRequestHeader("Accept", type);
+    
+  xhr.onload = () => handleResponse(xhr);
+    
+  xhr.send();
+    
+};
+
+
+const init = () => {
+      const sendButton = document.querySelector("#send");
+
+      var targetPage = document.getElementById("page").value;
+      var contentType = document.getElementById("type").value;
+      //functions to call sendAjax for us with the correct parameters
+      const sendQuery = () => sendAjax(targetPage);
+          
+      
+      document.getElementById("page").addEventListener("change", () => {
+          targetPage = document.getElementById("page").value;
+      });
+    
+      document.getElementById("type").addEventListener("change", () => {
+         contentType = document.getElementById("type").value;
+      });
+    
+      //attach the correct functions to the correct events
+      sendButton.addEventListener('click', sendQuery);
+
+};
+
+window.onload = init;
   </script>
 </head>
 <body>
