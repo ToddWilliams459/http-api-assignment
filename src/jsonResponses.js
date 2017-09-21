@@ -21,7 +21,7 @@ const success = (request, response) => {
 // function to show a bad request without the correct parameters
 const badRequest = (request, response, params) => {
   // message to send
-    console.log(a.b.c.d);
+   // console.log(a.b.c.d);
   const responseJSON = {
     message: 'This request has the required parameters',
   };
